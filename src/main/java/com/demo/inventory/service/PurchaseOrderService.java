@@ -130,7 +130,10 @@ public class PurchaseOrderService {
 
     // TODO: add Javadoc to this method
     public List<PurchaseOrder> findBySupplier(Long supplierId) {
-        // BUG #18: does not verify the supplier exists before querying
+        if (!supplierRepository.existsById(supplierId)) {
+            throw new ResourceNotFoundException(
+                "Supplier not found with id: " + supplierId);
+        }
         return orderRepository.findBySupplierId(supplierId);
     }
 
