@@ -61,7 +61,12 @@ public class StockMovementService {
         if (type == StockMovement.MovementType.IN) {
             newStock = product.getCurrentStock() + dto.getQuantity();
         } else if (type == StockMovement.MovementType.OUT) {
-            // BUG #11: does not check if there is sufficient stock before deducting
+            if (dto.getQuantity() > product.getCurrentStock()) {
+                throw new BusinessException(
+                    "Insufficient stock for product " + product.getSku() +
+                    ". Available: " + product.getCurrentStock() +
+                    ", Requested: " + dto.getQuantity());
+            }
             newStock = product.getCurrentStock() - dto.getQuantity();
         } else {
             // ADJUSTMENT: quantity can be positive or negative
