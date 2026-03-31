@@ -1,0 +1,49 @@
+# .cursorrules — inventory-management
+# Cursor reads this file to understand the project context and coding style.
+
+## Tech stack
+- Backend: Java 17, Spring Boot 3.2, Maven, JPA/Hibernate, MySQL
+- Frontend: React 18, Axios
+- Tests: JUnit 5, Mockito, AssertJ, MockMvc
+- Containers: Docker, Docker Compose
+
+## Java conventions (Backend)
+- Always use constructor injection, never @Autowired on fields
+- All public service methods must have complete Javadoc (@param, @return, @throws)
+- Use custom exceptions: ResourceNotFoundException and BusinessException
+- Use BigDecimal for all monetary values (unitPrice, totalAmount, lineTotal)
+- Apply soft delete (active = false), never deleteById()
+- Validate all input parameters at the start of each service method
+- All entity and method names in English
+- Use @Transactional on service methods that modify multiple entities
+
+## Business rules to enforce
+- Stock can never go negative — validate before any OUT or ADJUSTMENT movement
+- Purchase order status transitions must follow: DRAFT → SUBMITTED → APPROVED → RECEIVED
+  CANCELLED is allowed from DRAFT or SUBMITTED only
+- SKU must be unique across all products
+- Warehouse code must be unique across all warehouses
+- Supplier email must be unique across all suppliers
+- lineTotal on PurchaseOrderItem must always equal quantity * unitPrice
+
+## Test conventions
+- Framework: JUnit 5 + Mockito + AssertJ
+- Class annotation: @ExtendWith(MockitoExtension.class)
+- Method name: methodName_context_expectedResult
+- @DisplayName required on every test with a clear English description
+- One test per concrete behavior
+- Mock only repositories and external dependencies
+
+## React conventions (Frontend)
+- Functional components with hooks only, no class components
+- JSDoc on each component documenting its props
+- Always handle three states: loading (boolean), error (string|null), data
+- Format prices with: toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+- Format dates with: new Date(dateStr).toLocaleDateString('en-US')
+- Show server validation errors field by field, not as a single generic message
+
+## What this project contains for practice
+- 18 bugs in backend services (BUG #1–#18)
+- 10 bugs in the frontend (BUG #19–#28)
+- Incomplete Javadoc marked with TODO throughout
+- Missing tests marked with TODO in test files
