@@ -23,38 +23,30 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          claude_args: "--max-turns 5"
+          claude_args: "--max-turns 15"
           prompt: |
-            You are a senior code reviewer analyzing a Pull Request for the
-            Inventory Management System (Spring Boot + React).
+            You are a senior code reviewer. Analyze ONLY the changed files
+            in this Pull Request (use git diff to get them).
 
-            Analyze the git diff of this PR and provide:
+            Provide a concise review with these sections:
 
-            ## Risk Assessment
-            Rate the overall risk: LOW / MEDIUM / HIGH
-            Justify in 2-3 sentences.
+            ## Risk: LOW / MEDIUM / HIGH
+            One sentence justification.
 
             ## Critical findings
-            List any violations of business rules defined in CLAUDE.md.
-            For each finding: file, line, issue, suggested fix.
+            Only violations of rules in CLAUDE.md. Format:
+            - FILE:LINE — issue — fix
 
-            ## Stock integrity check
-            Does any change affect stock levels? If yes, verify:
-            - Is stock validated before OUT movements?
-            - Can stock go negative after these changes?
+            ## Stock integrity
+            If StockMovementService.java changed: can stock go negative?
 
-            ## Status transition check
-            Does any change affect PurchaseOrder status?
-            If yes, are the allowed transitions enforced?
-
-            ## Bugs introduced or fixed
-            List any of the known BUG #N that are fixed or newly introduced.
+            ## Status transitions
+            If PurchaseOrderService.java changed: are transitions validated?
 
             ## Recommendation
-            APPROVE / REQUEST CHANGES — with clear reasoning.
+            APPROVE or REQUEST CHANGES — one sentence reason.
 
-            Keep the response concise and actionable. Focus on correctness,
-            not style.
+            Be brief. Focus only on changed files.
 
   # ── Job 2: Build and test (runs after AI analysis) ──────────────────────
   build-and-test:
