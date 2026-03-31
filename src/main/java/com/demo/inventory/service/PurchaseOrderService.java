@@ -102,8 +102,22 @@ public class PurchaseOrderService {
             throw new BusinessException("Invalid status: " + newStatus);
         }
 
-        // BUG #16: no validation of allowed status transitions
-        // e.g. CANCELLED → APPROVED should not be allowed
+        // Validate allowed status transitions
+        PurchaseOrder.Status current = order.getStatus();
+        boolean valid = switch (current) {
+            case DRAFT -> status == PurchaseOrder.Status.SUBMITTED ||
+                        status == PurchaseOrder.Status.CANCELLED;
+            case SUBMITTED -> status == PurchaseOrder.Status.APPROVED ||
+                            status == PurchaseOrder.Status.CANCELLED;
+            case APPROVED -> status == PurchaseOrder.Status.RECEIVED;
+            default -> false;
+        };
+
+        if (!valid) {
+            throw new BusinessException(
+                "Invalid status transition from " + current + " to " + status);
+        }
+
         order.setStatus(status);
         return orderRepository.save(order);
     }
