@@ -1,6 +1,6 @@
 package com.demo.inventory.controller;
 
-import com.demo.inventory.dto.InventoryDTOs.StockMovementDTO;
+import com.demo.inventory.dto.StockMovementDTO;
 import com.demo.inventory.model.StockMovement;
 import com.demo.inventory.service.StockMovementService;
 import jakarta.validation.Valid;

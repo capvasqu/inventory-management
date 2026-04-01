@@ -61,7 +61,7 @@ class StockMovementServiceTest {
         when(productRepository.save(any())).thenAnswer(inv -> inv.getArgument(0));
         when(movementRepository.save(any())).thenAnswer(inv -> inv.getArgument(0));
 
-        var dto = new com.demo.inventory.dto.InventoryDTOs.StockMovementDTO(
+        var dto = new com.demo.inventory.dto.StockMovementDTO(
                 1L, 1L, "IN", 20, "Purchase received", "PO-001");
 
         StockMovement result = movementService.recordMovement(dto);
@@ -76,7 +76,7 @@ class StockMovementServiceTest {
         when(productRepository.findById(1L)).thenReturn(Optional.of(sampleProduct));
         when(warehouseRepository.findById(1L)).thenReturn(Optional.of(sampleWarehouse));
 
-        var dto = new com.demo.inventory.dto.InventoryDTOs.StockMovementDTO(
+        var dto = new com.demo.inventory.dto.StockMovementDTO(
                 1L, 1L, "INVALID", 10, "Test", null);
 
         assertThatThrownBy(() -> movementService.recordMovement(dto))

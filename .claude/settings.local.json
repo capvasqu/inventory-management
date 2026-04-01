@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn compile:*)",
+      "Bash(./mvnw compile:*)",
+      "Bash(java -version)",
+      "Read(//c/Users/**)",
+      "Read(//c//**)",
+      "Bash(/dev/null -name mvn.cmd)",
+      "Bash(echo $PATH)",
+      "Bash(command -v mvn)",
+      "Bash(command -v mvn.cmd)"
+    ]
+  }
+}
