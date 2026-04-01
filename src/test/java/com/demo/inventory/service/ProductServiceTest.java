@@ -90,18 +90,6 @@ class ProductServiceTest {
         verify(productRepository).findProductsBelowReorderLevel();
     }
 
-    @Test
-    @DisplayName("Should deactivate product by setting active to false")
-    void deactivate_shouldSetActiveToFalse() {
-        // BUG #6 demo: currently calls deleteById instead of soft delete
-        // This test documents the EXPECTED behavior after fixing the bug
-        when(productRepository.findById(1L)).thenReturn(Optional.of(sampleProduct));
-        when(productRepository.save(any(Product.class))).thenAnswer(inv -> inv.getArgument(0));
-
-        // TODO: fix BUG #6 in ProductService.deactivate() then update this test
-        // Expected: product.setActive(false) + save — NOT deleteById
-    }
-
     // TODO: add test for create() with duplicate SKU
     // TODO: add test for update() with SKU conflict
     // TODO: add test for findById() with null id (BUG #3)
