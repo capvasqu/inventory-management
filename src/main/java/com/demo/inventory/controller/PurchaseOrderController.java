@@ -1,6 +1,6 @@
 package com.demo.inventory.controller;
 
-import com.demo.inventory.dto.InventoryDTOs.PurchaseOrderDTO;
+import com.demo.inventory.dto.PurchaseOrderDTO;
 import com.demo.inventory.model.PurchaseOrder;
 import com.demo.inventory.service.PurchaseOrderService;
 import jakarta.validation.Valid;

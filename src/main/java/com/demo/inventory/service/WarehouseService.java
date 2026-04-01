@@ -1,6 +1,6 @@
 package com.demo.inventory.service;
 
-import com.demo.inventory.dto.InventoryDTOs.WarehouseDTO;
+import com.demo.inventory.dto.WarehouseDTO;
 import com.demo.inventory.exception.BusinessException;
 import com.demo.inventory.exception.ResourceNotFoundException;
 import com.demo.inventory.model.Warehouse;

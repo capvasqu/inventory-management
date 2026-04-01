@@ -1,6 +1,6 @@
 package com.demo.inventory.controller;
 
-import com.demo.inventory.dto.InventoryDTOs.WarehouseDTO;
+import com.demo.inventory.dto.WarehouseDTO;
 import com.demo.inventory.model.Warehouse;
 import com.demo.inventory.service.WarehouseService;
 import jakarta.validation.Valid;
