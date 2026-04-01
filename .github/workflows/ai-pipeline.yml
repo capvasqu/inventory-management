@@ -28,10 +28,15 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          track_progress: true
           claude_args: "--max-turns 15"
           prompt: |
-            You are a senior code reviewer. Analyze ONLY the changed files
-            in this Pull Request (use git diff to get them).
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            You are a senior code reviewer for an Inventory Management System
+            (Spring Boot + React). Review this pull request and post your
+            findings as a PR comment using `gh pr comment`.
 
             Provide a concise review with these sections:
 
