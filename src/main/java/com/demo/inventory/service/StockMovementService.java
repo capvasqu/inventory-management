@@ -69,9 +69,13 @@ public class StockMovementService {
             }
             newStock = product.getCurrentStock() - dto.getQuantity();
         } else {
-            // ADJUSTMENT: quantity can be positive or negative
-            // BUG #12: adjustment type always adds — subtraction is not supported
+            // ADJUSTMENT: positive quantity adds stock, negative quantity removes stock
             newStock = product.getCurrentStock() + dto.getQuantity();
+            if (newStock < 0) {
+                throw new BusinessException(
+                    "Adjustment would result in negative stock for product: "
+                    + product.getSku());
+            }
         }
 
         // BUG #13: does not validate that newStock does not go negative
