@@ -10,10 +10,10 @@ Built as a practice project for AI-driven development with Claude Code and Curso
 ## About this project
 
 A realistic multi-module inventory system designed to practice:
-- Code review with AI agents (Claude Code)
-- Bug identification and fixing with Cursor
-- Test generation for untested code
-- Documentation generation from source code
+
+Build a CI/CD pipeline that not only runs tests but also analyzes each pull request before executing them. Claude Code analyzes the diff, assesses the risk, verifies critical business rules, and publishes a report directly to the pull request.
+
+The difference from a traditional pipeline: instead of simply reporting whether tests passed or failed, the pipeline explains WHY a change might be risky, identifies domain rule violations, and recommends APPROVING or REQUESTING CHANGES.
 
 **Tools used:** Claude Code · Cursor · Spring Boot · React · Docker · MySQL
 
